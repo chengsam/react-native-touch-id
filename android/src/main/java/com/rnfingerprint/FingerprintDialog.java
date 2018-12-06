@@ -32,6 +32,7 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
     private String dialogTitle = "";
     private String cancelText = "";
     private String sensorDescription = "";
+    private String sensorErrorDescription = "";
     private String errorText = "";
 
     @Override
@@ -39,6 +40,7 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
         super.onAttach(context);
 
         this.mFingerprintHandler = new FingerprintHandler(context, this);
+        this.mFingerprintHandler.setErrorDescription(this.sensorErrorDescription);
     }
 
     @Override
@@ -142,7 +144,7 @@ public class FingerprintDialog extends DialogFragment implements FingerprintHand
         }
 
         if (config.hasKey("sensorErrorDescription")) {
-            this.mFingerprintHandler.setErrorDescription(config.getString("sensorErrorDescription"));
+            this.sensorErrorDescription = config.getString("sensorErrorDescription");
         }
 
         if (config.hasKey("imageColor")) {
